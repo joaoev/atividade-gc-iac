@@ -1,5 +1,5 @@
 #!/bin/bash
-apt update -y && apt upgrade -y
+apt update -y
 apt install -y python3 python3-pip
 
 mkdir -p /opt/flask_app

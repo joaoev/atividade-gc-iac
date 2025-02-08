@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~> 2.0"
+    }
+  }
+}
+
 variable "digitalocean_api_token" {}
 
 provider "digitalocean" {
@@ -12,14 +21,13 @@ resource "digitalocean_droplet" "web" {
 
   user_data = <<-EOT
     #!/bin/bash
-    apt update -y && apt upgrade -y
+    apt update -y
     apt install -y curl
 
     # Baixar arquivos do repositório
     curl -o /tmp/app.py https://raw.githubusercontent.com/joaoev/atividade-gc-iac/main/app.py
     curl -o /tmp/setup.sh https://raw.githubusercontent.com/joaoev/atividade-gc-iac/main/setup.sh
 
-    # Dar permissão e executar setup
     chmod +x /tmp/setup.sh
     /tmp/setup.sh
   EOT
@@ -36,6 +44,12 @@ resource "digitalocean_firewall" "web_firewall" {
 
   inbound_rule {
     protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
     port_range       = "80"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
@@ -46,3 +60,4 @@ resource "digitalocean_firewall" "web_firewall" {
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 }
+
