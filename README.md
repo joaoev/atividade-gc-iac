@@ -103,7 +103,7 @@ terraform destroy -auto-approve
 
 Para acessar aplicação acesse:
 
-[http://167.172.251.8/](http://167.172.251.8/)
+- Atividade finalizada
 
 ## 📢 Considerações Finais
 
