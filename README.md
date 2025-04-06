@@ -103,7 +103,7 @@ terraform destroy -auto-approve
 
 Para acessar aplicação acesse:
 
-- Atividade finalizada
+- Atividade finalizada, deletei a instância.
 
 ## 📢 Considerações Finais
 
